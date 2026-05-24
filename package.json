@@ -2,6 +2,16 @@
   "name": "ai-content-summarizer",
   "private": true,
   "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "dev:server": "npm run dev --prefix server",
+    "start:server": "npm start --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "build:client": "npm run build --prefix client"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  },
   "dependencies": {
     "@pinecone-database/pinecone": "^7.2.0",
     "@napi-rs/canvas": "^0.1.70",

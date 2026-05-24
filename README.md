@@ -27,34 +27,30 @@ server/
 
 ## Setup
 
-1. Install backend dependencies.
+1. Install dependencies from the repository root.
 
 ```bash
-cd server
 npm install
 ```
 
-2. Install frontend dependencies.
+2. Create the local env files if they are missing.
 
 ```bash
-cd ../client
-npm install
+copy server\.env.example server\.env
+copy client\.env.example client\.env
 ```
 
-3. Copy `server/.env.example` to `server/.env` and `client/.env.example` to `client/.env`.
-
-4. Start the backend.
+3. Start both apps from the repo root.
 
 ```bash
-cd server
 npm run dev
 ```
 
-5. Start the frontend.
+4. If you prefer separate terminals, use:
 
 ```bash
-cd client
-npm run dev
+npm run dev:server
+npm run dev:client
 ```
 
 ## API Endpoints
@@ -66,5 +62,5 @@ npm run dev
 
 ## Notes
 
-- The frontend expects the backend at `VITE_API_BASE_URL`.
+- The frontend works locally through the Vite proxy on `/api`, so the client can talk to the backend at `http://localhost:5000` during development.
 - The backend uses the official Groq SDK and returns structured JSON for summaries.
