@@ -14,6 +14,7 @@ export const extractPdfText = async (buffer) => {
   }
 
   const { PDFParse } = await import('pdf-parse');
+  PDFParse.setWorker(new URL('pdfjs-dist/legacy/build/pdf.worker.min.mjs', import.meta.url).href);
   const parser = new PDFParse({});
   const data = await parser.getText({ data: buffer });
 

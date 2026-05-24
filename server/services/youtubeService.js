@@ -25,6 +25,23 @@ const getVideoId = (input) => {
 
 export const extractYoutubeText = async (youtubeUrl) => {
   const videoId = getVideoId(youtubeUrl);
-  const transcript = await YoutubeTranscript.fetchTranscript(videoId);
-  return transcript.map((item) => item.text).join(' ').replace(/\s+/g, ' ').trim();
+  try {
+    const transcript = await YoutubeTranscript.fetchTranscript(videoId);
+    return transcript.map((item) => item.text).join(' ').replace(/\s+/g, ' ').trim();
+  } catch (error) {
+    const message = error?.message || '';
+
+    if (
+      error?.name === 'YoutubeTranscriptDisabledError' ||
+      /transcript.*disabled|disabled.*transcript|no transcript|captions/i.test(message)
+    ) {
+      const transcriptError = new Error(
+        'Transcript is disabled for this video. Please use a video with captions enabled.'
+      );
+      transcriptError.status = 422;
+      throw transcriptError;
+    }
+
+    throw error;
+  }
 };
