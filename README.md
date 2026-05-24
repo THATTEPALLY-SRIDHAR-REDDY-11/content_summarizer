@@ -63,4 +63,4 @@ npm run dev:client
 ## Notes
 
 - The frontend works locally through the Vite proxy on `/api`, so the client can talk to the backend at `http://localhost:5000` during development.
-- The backend uses the official Groq SDK and returns structured JSON for summaries.
+- The backend uses the official Groq SDK and returns structured JSON for summaries.# content_summarizer
