@@ -31,8 +31,10 @@ export const extractPdfText = async (buffer) => {
 
   const { PDFParse } = await import('pdf-parse');
   PDFParse.setWorker(getPdfWorkerUrl());
-  const parser = new PDFParse({});
-  const data = await parser.getText({ data: buffer });
+  const parser = new PDFParse({ data: buffer });
+  const data = await parser.getText();
+
+  await parser.destroy?.();
 
   return data.text.replace(/\s+/g, ' ').trim();
 };
