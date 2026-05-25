@@ -2,17 +2,19 @@
   "version": 2,
   "buildCommand": "npm run build:client",
   "outputDirectory": "client/dist",
-  "routes": [
+  "functions": {
+    "api/index.mjs": {
+      "maxDuration": 60
+    }
+  },
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/index.mjs"
+      "source": "/api/(.*)",
+      "destination": "/api/index.mjs"
     },
     {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
